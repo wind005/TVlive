@@ -6,7 +6,7 @@
     <title>SOCKS5验证工具-批量验证&直播源匹配</title>
     <!-- 圆形Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='28' fill='%23673ab7'/><path d='M26 24h12v4H26v-4zm-2 8v-4h16v4H24zm20 8H20v-4h24v4z' fill='white'/><circle cx='32' cy='32' r='4' fill='white'/></svg>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -86,7 +86,7 @@ http://example.com/live.m3u8"></textarea>
                         <div class="form-row-compact">
                             <div class="form-group">
                                 <label for="proxy-timeout">代理超时（秒）</label>
-                                <input type="number" id="proxy-timeout" value="5" min="1" max="16" step="1">
+                                <input type="number" id="proxy-timeout" value="8" min="1" max="30" step="1">
                             </div>
                             
                             <div class="form-group">
@@ -173,7 +173,23 @@ http://example.com/live.m3u8"></textarea>
                     </div>
                 </div>
                 
-                <!-- 响应信息 -->
+               
+                
+                <!-- 标签页 -->
+                <div class="tabs">
+                    <div class="tab active" data-tab="proxy-results">
+                        <i class="fas fa-network-wired"></i> 代理验证结果
+                        <span class="stat-badge" id="proxy-results-badge">0</span>
+                    </div>
+                    <div class="tab" data-tab="stream-results">
+                        <i class="fas fa-satellite"></i> 直播源测试结果
+                        <span class="stat-badge" id="stream-results-badge">0</span>
+                    </div>
+                </div>
+                
+                <!-- 代理结果标签页 -->
+                <div id="proxy-results-tab" class="tab-content active">
+                     <!-- 响应信息 -->
                 <div class="response-info">
                     <div class="response-info-item">
                         <span class="response-info-label">总代理:</span>
@@ -191,26 +207,9 @@ http://example.com/live.m3u8"></textarea>
                         <span class="response-info-label">成功率:</span>
                         <span id="success-rate-stat" class="response-info-value">0%</span>
                     </div>
-                    <div class="response-info-item">
-                        <span class="response-info-label">平均响应:</span>
-                        <span id="avg-response-stat" class="response-info-value">0ms</span>
-                    </div>
+
                 </div>
                 
-                <!-- 标签页 -->
-                <div class="tabs">
-                    <div class="tab active" data-tab="proxy-results">
-                        <i class="fas fa-network-wired"></i> 代理验证结果
-                        <span class="stat-badge" id="proxy-results-badge">0</span>
-                    </div>
-                    <div class="tab" data-tab="stream-results">
-                        <i class="fas fa-satellite"></i> 直播源测试结果
-                        <span class="stat-badge" id="stream-results-badge">0</span>
-                    </div>
-                </div>
-                
-                <!-- 代理结果标签页 -->
-                <div id="proxy-results-tab" class="tab-content active">
                     <div class="batch-results">
                        <table id="proxy-result-table" class="batch-result-table">
     <thead>
@@ -236,7 +235,7 @@ http://example.com/live.m3u8"></textarea>
 </table>
                     </div>
                     
-                    <div class="buttons" style="margin-top: 7px; padding-top: 10px; border-top: 1px dashed var(--border-color);max-height:40px;">
+                    <div class="buttons" style="margin-top: 7px; padding-top: 10px; border-top: 1px dashed var(--border-color);max-height:100px;">
                         <button id="export-proxy-result-btn" class="btn btn-export">
                             <i class="fas fa-download"></i> 导出
                         </button>
@@ -258,10 +257,7 @@ http://example.com/live.m3u8"></textarea>
                             <span class="response-info-label">匹配成功:</span>
                             <span id="matched-streams-stat" class="response-info-value" style="color: var(--secondary-color);">0</span>
                         </div>
-                        <div class="response-info-item">
-                            <span class="response-info-label">最佳代理:</span>
-                            <span id="best-proxy-stat" class="response-info-value">-</span>
-                        </div>
+
                         <div class="response-info-item">
                             <span class="response-info-label">匹配率:</span>
                             <span id="match-rate-stat" class="response-info-value">0%</span>
